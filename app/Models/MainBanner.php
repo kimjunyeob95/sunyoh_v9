@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Main_banner
+ * App\Models\MainBanner
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner query()
  * @mixin \Eloquent
  */
-class Main_banner extends Model
+class MainBanner extends Model
 {
     use HasFactory;
     protected $table = 'tbl_main_banner';

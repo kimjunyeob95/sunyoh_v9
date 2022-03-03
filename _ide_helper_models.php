@@ -75,13 +75,13 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Main_banner
+ * App\Models\MainBanner
  *
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Main_banner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|MainBanner query()
  */
-	class Main_banner extends \Eloquent {}
+	class MainBanner extends \Eloquent {}
 }
 
 namespace App\Models{
