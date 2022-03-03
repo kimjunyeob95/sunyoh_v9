@@ -44,4 +44,3 @@ class BioRepository implements BioInterface
         return Bio::where('tb_seq',$id)->delete();
     }
 }
-?>
