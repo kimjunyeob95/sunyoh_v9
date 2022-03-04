@@ -1,3 +1,25 @@
+<?php
+    class A
+    {
+        public static $message = 'Hello, werld';
+
+        public static function foo()
+        {
+            return static::who();
+        }
+        public static function who()
+        {
+            var_dump(__CLASS__);
+        }
+    }
+
+    $a = new A();
+    $a->foo(); // A 출력
+    A::who(); // A 출력
+    $a::who(); // A 출력
+    A->who(); // 오류
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
