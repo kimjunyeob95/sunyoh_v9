@@ -26,7 +26,9 @@ class PostController extends Controller
     }
     public function index()
     {
-        $posts = Post::orderby('created_at','desc')->with(['comments','categories'])->get();
+        $posts = Post::orderby('ts_seq','desc')
+                    ->with(['comments','categories'])
+                    ->paginate(10);
         return response()->json($posts);
     }
 
