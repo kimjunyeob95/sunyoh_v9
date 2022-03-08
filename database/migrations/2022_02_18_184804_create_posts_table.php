@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('tbl_posts', function (Blueprint $table) {
             $table->id('ts_seq');
+            $table->bigInteger('user_id');
             $table->enum('ts_type',['W','E'])->default('W')->comment('W->works, E->exhibitions');
             $table->string('ts_title',45)->comment('제목');
             $table->string('ts_title_seo')->comment('seo-slug제목');

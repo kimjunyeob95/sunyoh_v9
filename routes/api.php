@@ -21,17 +21,14 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
     return $request->user();
 });
 
 Route::get('/ping', [AppController::class,'ping']);
 
 Route::get('/posts', [PostController::class,'index']);
-Route::post('/posts', [PostController::class,'create']);
 Route::get('/posts/{id}', [PostController::class,'read']);
-Route::put('/posts/{id}', [PostController::class,'update']);
-Route::delete('/posts/{id}', [PostController::class,'delete']);
 
 Route::post('/posts/{postId}/comments', [CommentController::class,'create']);
 Route::delete('/posts/{postId}', [CommentController::class,'delete']);
@@ -43,3 +40,10 @@ Route::delete('/categories/{id}',[CategoryController::class,'delete']);
 
 Route::post('/sign-up',[AuthController::class,'signUp']);
 Route::post('/sign-in',[AuthController::class,'signIn']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/posts', [PostController::class,'create']);
+    Route::patch('/posts/{id}', [PostController::class,'update']);
+    Route::delete('/posts/{id}', [PostController::class,'delete']);
+    
+});

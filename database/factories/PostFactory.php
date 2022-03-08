@@ -21,6 +21,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => rand(1,10),
             'ts_title' => $this->faker->sentence(2,true),
             'ts_title_seo' => $this->faker->sentence(2,true),
             'ts_subtitle' => $this->faker->sentence(2,true),

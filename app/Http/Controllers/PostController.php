@@ -34,8 +34,8 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
-        
         $params = $request->only(['ts_title','ts_title_seo','ts_subtitle','ts_desc']);
+        $params['user_id'] = $request->user()->id;
         $post = Post::create($params);
         if($post){
             $ids = $request->input('category_ids');
