@@ -13,4 +13,9 @@ class Comment extends Model
     {
         return $this->belongsTo(\App\Models\Post::class,'ts_seq','post_id');
     }
+
+    public function user()
+    {
+        # code...
+    }
 }

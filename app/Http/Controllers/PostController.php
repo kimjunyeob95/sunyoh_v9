@@ -27,7 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderby('ts_seq','desc')
-                    ->with(['comments','categories'])
+                    ->with(['comments','categories','user'])
                     ->paginate(10);
         return response()->json($posts);
     }
@@ -41,9 +41,10 @@ class PostController extends Controller
             $ids = $request->input('category_ids');
             $post['ts_seq']=$post->id;
             $post->categories()->sync($ids,$post['ts_seq']);
-
+ 
             $this->result['msg'] = '추가 되었습니다.';
-            $this->result['data'] = $post;
+            $this->result['data'] = $post; 
+            $this->result['data'] = Post::where('ts_seq',$post->id)->with(['user','categories'])->first(); 
             return response()->json($this->result);
         }
         if(!$post){
@@ -57,32 +58,43 @@ class PostController extends Controller
         return response()->json($post);
     }
 
-    public function update($id)
+    public function update(Request $request,$id)
     {
-
-        $post = Post::where('ts_seq',$id)->update($this->where_query);
-
+        $post = Post::where('ts_seq',$id)->first();
         if(!$post){
             $this->result['msg'] = '조회할 데이터가 없습니다.';
             return response()->json($this->result,404);
         }
 
+        $user = $request->user();
+        if($user->id !== $post->user_id){
+            $this->result['msg'] = '권한이 없습니다.';
+            return response()->json($this->result,403);
+        }
+
         if($post){
+            Post::where('ts_seq',$id)->update($this->where_query);
             $ids = $request->input('category_ids');
-            $post['ts_seq']=$post->id;
             $post->categories()->sync($ids,$post['ts_seq']);
             $this->result['msg'] = '수정되었습니다.';
             return response()->json($this->result);
         }
     }
 
-    public function delete($id)
+    public function delete(Request $request,$id)
     {
-        $post = Post::where('ts_seq',$id)->delete();
+        $post = Post::where('ts_seq',$id)->first();
         if(!$post){
+            $this->result['msg'] = '조회할 데이터가 없습니다.';
             return response()->json($this->result,404);
         }
         if($post){
+            $user = $request->user();
+            if($user->id !== $post->user_id){
+                $this->result['msg'] = '권한이 없습니다.';
+                return response()->json($this->result,403);
+            }
+            Post::where('ts_seq',$id)->delete();
             return response()->json(['message'=>"삭제완료"]);
         }
     }

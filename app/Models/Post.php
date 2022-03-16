@@ -32,7 +32,7 @@ class Post extends Model
     }
     public function user()
     {
-        return $this->belongsTo(\App\Models\User::class,'id','ts_seq');
+        return $this->belongsTo(\App\Models\User::class,'user_id','id');
     }
 
     
