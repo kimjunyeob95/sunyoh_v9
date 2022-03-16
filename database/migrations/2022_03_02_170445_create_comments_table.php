@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('post_id');
-            $table->string('author',128);
             $table->longText('content');
             $table->timestamps();
         });

@@ -11,12 +11,12 @@ class CommentController extends Controller
     {
         $post = Post::firstWhere('ts_seq',$postId);
         if(!$post) return abort(404);
-    
-
-        $author = $request->input('author');
+        
+        $user = $request->user();
         $content = $request->input('content');
 
         $comment = new Comment();
+        $comment->user_id = $user->id;
         $comment->post_id = $post->ts_seq;
         $comment->content = $content;
         $comment->author = $author;
